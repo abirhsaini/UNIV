@@ -41,10 +41,11 @@ public class Login extends HttpServlet {
 				 response.sendRedirect("home.jsp");
 				 System.out.println("connexion faite");
 			}
-			else {
-				response.sendRedirect("auth.jsp");
-				System.out.println("mdp incorrecte");
-			}
+			 else {
+	                session.setAttribute("loginError", "Mot de passe incorrect");
+	                response.sendRedirect("auth.jsp");
+	                System.out.println("Mot de passe incorrect");
+			 }
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

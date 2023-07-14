@@ -22,6 +22,11 @@
 			</div>
             <div class="col-6">
               <h2 class="fw-bold mb-5">connexion</h2>
+               <% if (session.getAttribute("loginError") != null) { %>
+        <div class="alert alert-danger mt-4" role="alert">
+          <%= session.getAttribute("loginError") %>
+        </div>
+      <% } %>
               <form method="POST" action="Login">
                 <div class="form-outline mb-4">
                   <input type="text" id="form3Example3" name="username" class="form-control" placeholder="Username" style="background-color:#F0F0F0" required>
@@ -36,6 +41,8 @@
                 <p class="d-flex align-items-end pt-5 justify-content-center"> FCZ - MTSI - Solutions Universitaires </p>
                 </div>
               </form>
+              
+     
             </div>
           </div>
         </div>

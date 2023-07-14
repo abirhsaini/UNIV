@@ -69,7 +69,7 @@
             <p class="text-primary font-weight-bold">Tableau des etudiants</p>
             
  
-            <table id="example" class="table table-striped" style="width:100px;font-size: 15px;">
+            <table id="example" class="table table-striped " style="width:100px;font-size: 15px;">
                 <thead>
                     <tr>
                         <th class="th-sm">id</th>
@@ -127,6 +127,6 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script>let table = new DataTable('#example');</script>
+    <script>let table = new DataTable('#example',{ scrollX: true});</script>
 </body>
 </html>
