@@ -1,13 +1,20 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="beans.etudiant"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ page import="beans.etudiant" %>
 <%@ page import="java.sql.*" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <% 
 	String username ="";
 	if (session.getAttribute("username")!=null){
 		username = session.getAttribute("username").toString();
+
 	}
 	else {
 	response.sendRedirect("auth.jsp");
 	}%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,18 +23,22 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
 </head>
 <body>
+
     <jsp:include page="WEB-INF/sidebar.jsp" />
     <div style="margin-left:60px">
         <div class="bg-white" style="margin-top:-20px;z-index:100;position:relative">
             <div class="container" style="display: flex;align-items: center;justify-content: space-between; padding:10px;">
                 <strong>compte etudiant</strong>
                 <div>
-                    <button class="btn btn-primary btn-sm">
+                <form action="Home" method="post">
+                
+                    <button class="btn btn-primary btn-sm" type="submit" name="action" value="valider">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-lg" viewBox="0 0 16 16">
                             <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"/>
                         </svg>
                         valider
                     </button>
+                      <input type="hidden" name="selectedIdsInput" id="selectedIdsInput" value="" />
                     <button class="btn btn-success btn-sm">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-lg" viewBox="0 0 16 16">
                             <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"/>
@@ -62,6 +73,7 @@
                         </svg>
                         ajouter
                     </button>
+                    </form>
                 </div>
             </div>
         </div>
@@ -79,8 +91,8 @@
                         <th class="th-sm">categorie</th>
                         <th class="th-sm">type de bac</th>
                         <th class="th-sm">note</th>
-                        <th class="th-sm">Tele1</th>
-                        <th class="th-sm">Tele2</th>
+                        <th class="th-sm">Tel1</th>
+                        <th class="th-sm">Tel2</th>
                         <th class="th-sm">valider</th>
                         <th class="th-sm">D.D.appele</th>
                         <th class="th-sm">D.import</th>
@@ -89,44 +101,58 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Tiger Nixon</td>
-                        <td>System Architect</td>
-                        <td>Edinburgh</td>
-                        <td>61</td>
-                        <td>2011/04/25</td>
-                        <td>$320,800</td>
-                          <td>Tiger Nixon</td>
-                        <td>System Architect</td>
-                        <td>Edinburgh</td>
-                        <td>61</td>
-                        <td></td>
-                        <td>$320,800</td>
-                        <td>Edinburgh</td>
-                    </tr>
-                    <tr>
-                        <td>abir hsaini</td>
-                        <td>oujda </td>
-                        <td>Edinburgh</td>
-                        <td>22</td>
-                        <td>2011/04/25</td>
-                        <td>$320,800</td>
-                        <th>Start date</th>
-                        <th>Start date</th>
-                        <th>Start date</th>
-                        <th>Start date</th>
-                        <th>Start date</th>
-                        <th>Start date</th>
-                        <th>Start date</th>
-                    </tr>
-                    <!-- more table rows... -->
+                
+				     <c:forEach var="etudiant" items="${etudiants}">
+				        <tr data-idetudiant="${etudiant.idEtudiant}">
+				            <td><c:out value="${etudiant.idEtudiant}" /></td>
+				            <td><c:out value="${etudiant.codeEtudiant}" /></td>
+				            <td><c:out value="${etudiant.nom}" /></td>
+				            <td><c:out value="${etudiant.prenom}" /></td>
+				            <td><c:out value="${etudiant.categorie}" /></td>
+				            <td><c:out value="${etudiant.typeDeBac}" /></td>
+				            <td><c:out value="${etudiant.note}" /></td>
+				            <td><c:out value="${etudiant.tel1}" /></td>
+				            <td><c:out value="${etudiant.tel2}" /></td>
+				            <td><c:out value="${etudiant.valider}" /></td>
+				            <td><c:out value="${etudiant.statut}" /></td>
+				            <td><c:out value="${etudiant.getDimport()}" /></td>
+				            <td><c:out value="${etudiant.reg}" /></td>
+				        </tr>
+				    </c:forEach>
                 </tbody>
                
             </table>
         </div>
+        
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script>let table = new DataTable('#example',{ scrollX: true});</script>
+ <script>
+    let table = new DataTable('#example', { scrollX: true });
+    const idEtudiants = [];
+    table.on('click', 'tbody tr', function (e) {
+        e.currentTarget.classList.toggle('selected');
+        
+        // Accéder à l'id de l'étudiant de la ligne sélectionnée
+        var idEtudiant = e.currentTarget.getAttribute("data-idetudiant");
+        
+        // Vérifier si l'ID de l'étudiant est déjà présent dans le tableau
+        var index = idEtudiants.indexOf(idEtudiant);
+        if (index !== -1) {
+            // L'ID est déjà présent, le supprimer du tableau
+            idEtudiants.splice(index, 1);
+            console.log('ID de l\'étudiant supprimé :', idEtudiant);
+        } else {
+            // L'ID n'est pas présent, l'ajouter au tableau
+            idEtudiants.push(idEtudiant);
+            console.log('Nouvel ID de l\'étudiant ajouté :', idEtudiant);
+        }
+        
+        console.log('Tableau des ID d\'étudiants :', idEtudiants);
+        document.getElementById('selectedIdsInput').value = idEtudiants.join(",");
+    });
+    
+</script>
+
 </body>
 </html>

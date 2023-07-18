@@ -8,7 +8,7 @@
     <description></description>
     <display-name>Login</display-name>
     <servlet-name>Login</servlet-name>
-    <servlet-class>controler.Login</servlet-class>
+    <servlet-class>servelet.Login</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>Login</servlet-name>
@@ -18,10 +18,20 @@
     <description></description>
     <display-name>Home</display-name>
     <servlet-name>Home</servlet-name>
-    <servlet-class>controler.Home</servlet-class>
+    <servlet-class>servelet.Home</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>Home</servlet-name>
     <url-pattern>/Home</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>idonok</display-name>
+    <servlet-name>idonok</servlet-name>
+    <servlet-class>servelet.idonok</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>idonok</servlet-name>
+    <url-pattern>/idonok</url-pattern>
   </servlet-mapping>
 </web-app>
