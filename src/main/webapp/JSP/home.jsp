@@ -12,7 +12,7 @@
 
 	}
 	else {
-	response.sendRedirect("auth.jsp");
+	response.sendRedirect(request.getContextPath());
 	}%>
 
 <!DOCTYPE html>
@@ -78,7 +78,7 @@ input{
 	border: thin solid #000}
 </style>
 
-    <jsp:include page="WEB-INF/sidebar.jsp" />
+    <jsp:include page="../WEB-INF/sidebar.jsp" />
 
     <div style="margin-left:60px">
         <div class="bg-white" style="margin-top:-20px;z-index:100;position:relative">
@@ -100,6 +100,7 @@ input{
                         </svg>
                         importer etudiant
                     </button>
+                    <input type="hidden" name="selectedIdsInput" id="selectedIdsInput" value="" />
                     <button class="btn btn-primary btn-sm">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard-check" viewBox="0 0 16 16">
                             <path fill-rule="evenodd" d="M10.854 7.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708 0z"/>
@@ -123,7 +124,7 @@ input{
                         modifier
                         
                     </button>
-                       <button class="btn btn-primary btn-sm" type="submit" id="addStudentBtn">
+                       <button class="btn btn-primary btn-sm" type="button" id="addStudentBtn">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
                             <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-5H2a.5.5 0 0 1 0-1h3V2.5A.5.5 0 0 1 8 2zm0-2A1.5 1.5 0 0 0 6.5.5h-3A1.5 1.5 0 0 0 2 2v3H.5a.5.5 0 0 0 0 1H2v3a1.5 1.5 0 0 0 1.5 1.5h3A1.5 1.5 0 0 0 8 9.5v-3h3a.5.5 0 0 0 0-1H8V2.5A1.5 1.5 0 0 0 6.5 1z"/>
                         </svg>
@@ -199,7 +200,7 @@ input{
                     </div>
                     </div>
                  
-                    <input type="hidden" name="selectedIdsInput" id="selectedIdsInput" value="" />
+                    
             		 <div id="myModal" class="modal">
 							  <div class="modal-content">
 							    <!-- Add your form here -->

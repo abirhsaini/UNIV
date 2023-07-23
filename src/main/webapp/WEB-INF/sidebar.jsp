@@ -10,7 +10,7 @@
 	}%>
 <html>
 <head>
-<link rel="stylesheet" href="WEB-INF/home.css">
+<link rel="stylesheet" href="../CSS/home.css">
 <meta charset="ISO-8859-1">
 <title></title>
 

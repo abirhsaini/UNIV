@@ -44,7 +44,7 @@ public class Home extends HttpServlet {
 			e1.printStackTrace();
 		}
 		
-		request.getRequestDispatcher("/home.jsp").forward(request, response);
+		request.getRequestDispatcher("JSP/home.jsp").forward(request, response);
 	}
 
 	/**
@@ -53,18 +53,18 @@ public class Home extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	    // TODO Auto-generated method stub
 		HomeImpl home =new controller.HomeImpl();
-	   
-	    
+		String[] selectedIdsArray = request.getParameterValues("selectedIdsInput");
+ 	    System.out.println("selectedIdsArray: " + Arrays.toString(selectedIdsArray));
+ 	    int numberOfSelectedStudents = selectedIdsArray.length;
+ 	    request.setAttribute("numberOfSelectedStudents", numberOfSelectedStudents);
+ 	   List<String> selectedIds = Arrays.asList(selectedIdsArray);
 	    String action= request.getParameter("action");
 	    System.out.println(action);
 	    if (action!=null) {
 	    
 		    if (action.equals("valider") ) {
-		   	 String[] selectedIdsArray = request.getParameterValues("selectedIdsInput");
-		 	    System.out.println("selectedIdsArray: " + Arrays.toString(selectedIdsArray));
-		 	    int numberOfSelectedStudents = selectedIdsArray.length;
-		 	    request.setAttribute("numberOfSelectedStudents", numberOfSelectedStudents);
-		 	    List<String> selectedIds = Arrays.asList(selectedIdsArray);
+		   	 	
+		 	    
 		        for (String id : selectedIds) {
 		            try {
 		                home.ValiderEtudiant(Integer.parseInt(id));
@@ -119,11 +119,7 @@ public class Home extends HttpServlet {
 		    	
 		    }
 		    if (action.equals("modifier-phase1")) {
-		   	 String[] selectedIdsArray = request.getParameterValues("selectedIdsInput");
-		 	    System.out.println("selectedIdsArray: " + Arrays.toString(selectedIdsArray));
-		 	    int numberOfSelectedStudents = selectedIdsArray.length;
-		 	    request.setAttribute("numberOfSelectedStudents", numberOfSelectedStudents);
-		 	    List<String> selectedIds = Arrays.asList(selectedIdsArray);
+		   	 
 		    	try {
 					etudiant etudiant=home.chercherEtudiant(Integer.parseInt(selectedIds.get(0)));
 					System.out.println(etudiant);
@@ -147,11 +143,7 @@ public class Home extends HttpServlet {
 				}
 		    }
 		    if (action.equals("modifier-phase2")) {
-		    	 String[] selectedIdsArray = request.getParameterValues("selectedIdsInput");
-		    	System.out.println("selectedIdsArray: " + Arrays.toString(selectedIdsArray));
-		 	    int numberOfSelectedStudents = selectedIdsArray.length;
-		 	    request.setAttribute("numberOfSelectedStudents", numberOfSelectedStudents);
-		 	    List<String> selectedIds = Arrays.asList(selectedIdsArray);
+		    	
 		    	try {
 					etudiant etudiant=home.chercherEtudiant(Integer.parseInt(selectedIds.get(0)));
 					String etudiantCode= request.getParameter("studentCode1");
@@ -191,7 +183,7 @@ public class Home extends HttpServlet {
 	    
 	    }
 	    
-	    request.getRequestDispatcher("/home.jsp").forward(request, response);
+	    request.getRequestDispatcher("JSP/home.jsp").forward(request, response);
 	    
 	   
 	}

@@ -39,12 +39,13 @@ public class Login extends HttpServlet {
 				ResultSet rs=pst.executeQuery();
 				if (rs.next()) {
 					 session.setAttribute("username", username);
+					 
 					 response.sendRedirect("Home");
 					 System.out.println("connexion faite");
 				}
 				 else {
 		                session.setAttribute("loginError", "Mot de passe incorrect");
-		                response.sendRedirect("auth.jsp");
+		                response.sendRedirect("Login");
 		                System.out.println("Mot de passe incorrect");
 				 }
 				connection.close();
@@ -53,12 +54,12 @@ public class Login extends HttpServlet {
 				e.printStackTrace();
 			}
 		
+			 
 		} 
 
 		@Override
 		protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-			// TODO Auto-generated method stub
-			System.out.println("hhh");
+			req.getRequestDispatcher("/JSP/auth.jsp").forward(req, resp);
 			super.doGet(req, resp);
 		}
 	
