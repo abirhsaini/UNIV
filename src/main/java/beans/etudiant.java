@@ -11,7 +11,7 @@ public class etudiant {
 	String prenom;
 	String categorie;
 	String typeDeBac;
-	int note;
+	Double note;
 	String tel1;
 	String tel2;
 	String valider;

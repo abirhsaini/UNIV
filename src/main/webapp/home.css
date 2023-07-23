@@ -178,3 +178,28 @@ ul {
 li{
 	padding:5px;
 }
+/* The modal container */
+.modal {
+  display: none; /* Hide the modal by default */
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.4); /* Black background with transparency */
+}
+
+/* Modal content */
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%; /* Could be adjusted based on your preference */
+}
+
+/* Hide other elements when the modal is active */
+body.modal-active {
+  overflow: hidden;
+}
