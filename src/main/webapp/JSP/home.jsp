@@ -1,8 +1,10 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="beans.etudiant"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
 <%@ page import="beans.etudiant" %>
 <%@ page import="java.sql.*" %>
+<meta charset="UTF-8">
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <% 
@@ -23,9 +25,20 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
 </head>
 <body>
+
 <style>
 /* The modal container */
 .modal {
+  display: none; /* Hide the modal by default */
+  position:fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.4); /* Black background with transparency */
+}
+.modal3 {
   display: none; /* Hide the modal by default */
   position:fixed;
   z-index: 1;
@@ -43,6 +56,13 @@
   padding: 10px;
   border: 1px solid #888;
   width: 80%; /* Could be adjusted based on your preference */
+}
+.modal-content3 {
+  background-color: #fefefe;
+  margin: 10% auto; /* 15% from the top and centered */
+  padding: 10px;
+  border: 1px solid #888;
+  width: 300px; /* Could be adjusted based on your preference */
 }
 .modal1 {
   display: none; /* Hide the modal by default */
@@ -68,6 +88,9 @@ position:fixed;
 body.modal-active {
   overflow: hidden;
 }
+body.modal-active3 {
+  overflow: hidden;
+}
 body.modal-active1 {
   overflow: hidden;
 }
@@ -78,7 +101,7 @@ input{
 	border: thin solid #000}
 </style>
 
-    <jsp:include page="../WEB-INF/sidebar.jsp" />
+    <jsp:include page="sidebar.jsp" />
 
     <div style="margin-left:60px">
         <div class="bg-white" style="margin-top:-20px;z-index:100;position:relative">
@@ -93,8 +116,8 @@ input{
                         </svg>
                         valider
                     </button>
-                      
-                    <button class="btn btn-success btn-sm">
+                    
+                    <button class="btn btn-success btn-sm" type="button" id="importer">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-lg" viewBox="0 0 16 16">
                             <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"/>
                         </svg>
@@ -135,22 +158,22 @@ input{
 				                    <form action="Home" method="post">
 				                    	 <div class="row justify-content-center">
 							                <div class="col-md-4 mb-3">
-							                    <input type="text" name="studentName1" class="form-control" placeholder="Nom de l'Ètudiant" value="${nomEtudiant}" >
+							                    <input type="text" name="studentName1" class="form-control" placeholder="Nom de l'√©tudiant" value="${nomEtudiant}" >
 							                </div>
 							                <div class="col-md-4 mb-3">
-							                    <input type="text" name="studentPrenom1" class="form-control" value="${prenomEtudiant}" placeholder="PrÈnom de l'Ètudiant">
+							                    <input type="text" name="studentPrenom1" class="form-control" value="${prenomEtudiant}" placeholder="Pr√©nom de l'√©tudiant">
 							                </div>
 							                <div class="col-md-4 mb-3">
-							                    <input type="text" name="studentCode1" value="${codeEtudiant}" class="form-control" placeholder="Code de l'Ètudiant">
+							                    <input type="text" name="studentCode1" value="${codeEtudiant}" class="form-control" placeholder="Code de l'√©tudiant">
 							                </div>
 							                <div class="col-md-4 mb-3">
-							                    <input type="text" name="studentNote1" value="${noteEtudiant}" class="form-control" placeholder="Note de l'Ètudiant" >
+							                    <input type="text" name="studentNote1" value="${noteEtudiant}" class="form-control" placeholder="Note de l'√©tudiant" >
 							                </div>
 							                <div class="col-md-4 mb-3">
-							                    <input type="text" name="studentTel11" value="${tel1Etudiant}" class="form-control" placeholder="TÈlÈphone 1">
+							                    <input type="text" name="studentTel11" value="${tel1Etudiant}" class="form-control" placeholder="T√©l√©phone 1">
 							                </div>
 							                <div class="col-md-4 mb-3">
-							                    <input type="text" name="studentTel21"value="${tel2Etudiant}"  class="form-control" placeholder="TÈlÈphone 2" >
+							                    <input type="text" name="studentTel21"value="${tel2Etudiant}"  class="form-control" placeholder="T√©l√©phone 2" >
 							                </div>
 							                <div class="col-md-4 mb-3">
 							                    <select class="form-select" name="categorie1"  >
@@ -171,15 +194,15 @@ input{
 							                <div class="col-md-4 mb-3">
 							                    <select class="form-select" name="valider1" >
 							                        <option selected disabled>${validerEtudiant}</option>
-							                        <option value="validÈ">validÈ</option>
-							                        <option value="non validÈ">non validÈ</option>
+							                        <option value="valid√©">valid√©</option>
+							                        <option value="non valid√©">non valid√©</option>
 							                    </select>
 							                </div>
 							                <div class="col-md-4 mb-3">
 							                    <select class="form-select" name="statut1" >
 							                        <option selected disabled>${statutEtudiant}</option>
-							                        <option value="saturÈ">satuÈ</option>
-							                        <option value="non saturÈ">non satuÈ</option>
+							                        <option value="satur√©">satu√©</option>
+							                        <option value="non satur√©">non satu√©</option>
 							                    </select>
 							                </div>
 							                <div class="col-md-4 mb-3">
@@ -192,14 +215,30 @@ input{
 							            </div>
 							            <div class="row justify-content-center mt-2">
 							                <div class="col-md-8 text-center">
-							                    <button type="submit" class="btn btn-primary btn-lg"  name="action" value="modifier-phase2" >modifier l'Ètudiant</button>
+							                    <button type="submit" class="btn btn-primary btn-lg"  name="action" value="modifier-phase2" >modifier l'√©tudiant</button>
 							                    <button type="button" class="btn btn-secondary btn-lg" id="cancelAddBtn1">Annuler</button>
 							                </div>
 							            </div>
 							        </form>
                     </div>
                     </div>
-                 
+                 	<div id="myModal3" class="modal3">
+                 		<div class="modal-content">
+                 			<form  method="post" enctype="multipart/form-data">
+                 				<div class="row justify-content-center">
+                 					<div class="col-md-4 mb-3">
+                 						 <input type="file"  name="file" id="fileInput" accept=".xlsx">
+                 					</div>
+                 		 		</div>
+                 		 		<div class="row justify-content-center mt-2">
+                 		 	 		<div class="col-md-8 text-center">
+                 				  		<button class="btn btn-primary btn-lg" name="action" value="importer" onclick="importExcel()">Importer</button>
+                 				  		<button type="button" class="btn btn-secondary btn-lg" id="cancelAddBtn3">Annuler</button>
+                 		 			</div>
+                 		 		</div>
+                 			</form>
+                 		</div>
+                 	</div>
                     
             		 <div id="myModal" class="modal">
 							  <div class="modal-content">
@@ -208,26 +247,26 @@ input{
 							     <form  method="post">
 							            <div class="row justify-content-center">
 							                <div class="col-md-4 mb-3">
-							                    <input type="text" name="studentName" class="form-control" placeholder="Nom de l'Ètudiant" required>
+							                    <input type="text" name="studentName" class="form-control" placeholder="Nom de l'√©tudiant" required>
 							                </div>
 							                <div class="col-md-4 mb-3">
-							                    <input type="text" name="studentPrenom" class="form-control" placeholder="PrÈnom de l'Ètudiant" required>
+							                    <input type="text" name="studentPrenom" class="form-control" placeholder="Pr√©nom de l'√©tudiant" required>
 							                </div>
 							                <div class="col-md-4 mb-3">
-							                    <input type="text" name="studentCode" class="form-control" placeholder="Code de l'Ètudiant" required>
+							                    <input type="text" name="studentCode" class="form-control" placeholder="Code de l'√©tudiant" required>
 							                </div>
 							                <div class="col-md-4 mb-3">
-							                    <input type="text" name="studentNote" class="form-control" placeholder="Note de l'Ètudiant" required>
+							                    <input type="text" name="studentNote" class="form-control" placeholder="Note de l'√©tudiant" required>
 							                </div>
 							                <div class="col-md-4 mb-3">
-							                    <input type="text" name="studentTel1" class="form-control" placeholder="TÈlÈphone 1" required>
+							                    <input type="text" name="studentTel1" class="form-control" placeholder="T√©l√©phone 1" required>
 							                </div>
 							                <div class="col-md-4 mb-3">
-							                    <input type="text" name="studentTel2" class="form-control" placeholder="TÈlÈphone 2" required>
+							                    <input type="text" name="studentTel2" class="form-control" placeholder="T√©l√©phone 2" required>
 							                </div>
 							                <div class="col-md-4 mb-3">
 							                    <select class="form-select" name="studentCategorie" required>
-							                        <option selected disabled>CatÈgorie</option>
+							                        <option selected disabled>Cat√©gorie</option>
 							                        <option value="payant">payant</option>
 							                        <option value="boursier">boursier</option>
 							                        <option value="etranger">etranger</option>
@@ -244,20 +283,20 @@ input{
 							                <div class="col-md-4 mb-3">
 							                    <select class="form-select" name="valider" required>
 							                        <option selected disabled>Valider</option>
-							                        <option value="1">validÈ</option>
-							                        <option value="2">non validÈ</option>
+							                        <option value="valid√©">valid√©</option>
+							                        <option value="non valid√©">non valid√©</option>
 							                    </select>
 							                </div>
 							                <div class="col-md-4 mb-3">
 							                    <select class="form-select" name="satuer" required>
 							                        <option selected disabled>Statut</option>
-							                        <option value="satuÈ">satuÈ</option>
-							                        <option value="non satuÈ">non satuÈ</option>
+							                        <option value="satur√©">satur√©</option>
+							                        <option value="non satur√©">non satur√©</option>
 							                    </select>
 							                </div>
 							                <div class="col-md-4 mb-3">
 							                    <select class="form-select" name="reglement" required>
-							                        <option selected disabled>RÈglement</option>
+							                        <option selected disabled>R√©glement</option>
 							                        <option value="R">R</option>
 							                        <option value="N.R">N.R</option>
 							                    </select>
@@ -265,7 +304,7 @@ input{
 							            </div>
 							            <div class="row justify-content-center mt-2">
 							                <div class="col-md-8 text-center">
-							                    <button type="submit" class="btn btn-primary btn-lg"  name="action" value="ajouter" >Ajouter l'Ètudiant</button>
+							                    <button type="submit" class="btn btn-primary btn-lg"  name="action" value="ajouter" >Ajouter l'√©tudiant</button>
 							                    <button type="button" class="btn btn-secondary btn-lg" id="cancelAddBtn">Annuler</button>
 							                </div>
 							            </div>
@@ -332,22 +371,22 @@ input{
     table.on('click', 'tbody tr', function (e) {
         e.currentTarget.classList.toggle('selected');
         
-        // AccÈder ‡ l'id de l'Ètudiant de la ligne sÈlectionnÈe
+        // Acc√©der √† l'id de l'√©tudiant de la ligne s√©lectionn√©e
         var idEtudiant = e.currentTarget.getAttribute("data-idetudiant");
         
-        // VÈrifier si l'ID de l'Ètudiant est dÈj‡ prÈsent dans le tableau
+        // V√©rifier si l'ID de l'√©tudiant est d√©j√† pr√©sent dans le tableau
         var index = idEtudiants.indexOf(idEtudiant);
         if (index !== -1) {
-            // L'ID est dÈj‡ prÈsent, le supprimer du tableau
+            // L'ID est d√©j√† pr√©sent, le supprimer du tableau
             idEtudiants.splice(index, 1);
-            console.log('ID de l\'Ètudiant supprimÈ :', idEtudiant);
+            console.log('ID de l\'√©tudiant supprim√© :', idEtudiant);
         } else {
-            // L'ID n'est pas prÈsent, l'ajouter au tableau
+            // L'ID n'est pas pr√©sent, l'ajouter au tableau
             idEtudiants.push(idEtudiant);
-            console.log('Nouvel ID de l\'Ètudiant ajoutÈ :', idEtudiant);
+            console.log('Nouvel ID de l\'√©tudiant ajout√© :', idEtudiant);
         }
         
-        console.log('Tableau des ID d\'Ètudiants :', idEtudiants);
+        console.log('Tableau des ID d\'√©tudiants :', idEtudiants);
         document.getElementById('selectedIdsInput').value = idEtudiants.join(",");
     });
  
@@ -355,10 +394,17 @@ input{
         document.getElementById('myModal').style.display = 'block';
         document.body.classList.add('modal-active');
     });
-
+    document.getElementById('importer').addEventListener('click', function() {
+        document.getElementById('myModal3').style.display = 'block';
+        document.body.classList.add('modal-active3');
+    });
     document.getElementById('cancelAddBtn').addEventListener('click', function() {
         document.getElementById('myModal').style.display = 'none';
         document.body.classList.remove('modal-active');
+    });
+    document.getElementById('cancelAddBtn3').addEventListener('click', function() {
+        document.getElementById('myModal3').style.display = 'none';
+        document.body.classList.remove('modal-active3');
     });
     
     document.getElementById('cancelAddBtn1').addEventListener('click', function() {
@@ -368,9 +414,9 @@ input{
 
     document.getElementById('addStudentBtn1').addEventListener('click', function(e) {
         if (idEtudiants.length !== 1) {
-            alert("Veuillez sÈlectionner un seul Ètudiant.");
+            alert("Veuillez s√©lectionner un seul √©tudiant.");
         } else {
-            console.log("ID de l'Ètudiant sÈlectionnÈ :", idEtudiants[0]);
+            console.log("ID de l'√©tudiant s√©lectionn√© :", idEtudiants[0]);
            
             var selectedRow = document.querySelector('tr.selected[data-idetudiant]');
             console.log(selectedRow.querySelector('td[datavalider]').innerText);
@@ -409,6 +455,29 @@ input{
             }
         }
     });
+    
+    function importExcel() {
+        // R√©cup√©rer le fichier s√©lectionn√© par l'utilisateur
+        var fileInput = document.getElementById('fileInput');
+        var file = fileInput.files[0];
+		console.log(fileInput);
+		console.log(file)
+        // Cr√©er un objet FormData pour envoyer le fichier au serveur
+        var formData = new FormData();
+        formData.append('file', file);
+        console.log(formData)
+        // Envoyer le fichier au serveur en utilisant une requ√™te AJAX
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', 'Home'); // Remplacez 'importExcelServlet' par l'URL de votre servlet ou contr√¥leur de gestion de l'importation
+        xhr.onload = function() {
+            if (xhr.status === 200) {
+                alert('Importation r√©ussie !');
+            } else {
+                alert('Erreur lors de l\'importation du fichier.');
+            }
+        };
+        xhr.send(formData);
+    }
    
 </script>
 

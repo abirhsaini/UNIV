@@ -34,4 +34,14 @@
     <servlet-name>idonok</servlet-name>
     <url-pattern>/idonok</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Preinscription</display-name>
+    <servlet-name>Preinscription</servlet-name>
+    <servlet-class>servelet.Preinscription</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Preinscription</servlet-name>
+    <url-pattern>/Preinscription</url-pattern>
+  </servlet-mapping>
 </web-app>

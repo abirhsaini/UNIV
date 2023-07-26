@@ -18,6 +18,7 @@ public class etudiant {
 	String statut;
 	String Dimport;
 	String reg;
+	String admission;
 	
 
 }

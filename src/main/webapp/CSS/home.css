@@ -17,6 +17,7 @@
   box-sizing: border-box;
 }
 
+
 body {
  
   margin: var(--header-height) 0 0 0;
@@ -32,7 +33,7 @@ a {
 
 .header {
 	
-  margin-top:-63.666px;
+
   margin-left:10px;
   width: 100%;
   top: 0;
@@ -118,6 +119,9 @@ a {
 
 
 
+}
+a{
+	text-decoration:none;
 }
 
 .body-pd {

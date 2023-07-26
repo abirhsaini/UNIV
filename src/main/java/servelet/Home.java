@@ -1,7 +1,13 @@
 package servelet;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -9,6 +15,7 @@ import java.util.List;
 import beans.etudiant;
 import controller.HomeImpl;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -16,10 +23,13 @@ import jakarta.servlet.RequestDispatcher;
 
 
 import jakarta.servlet.http.HttpSession;
+import jakarta.servlet.http.Part;
 
 /**
  * Servlet implementation class Home
  */
+
+@MultipartConfig
 public class Home extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -32,12 +42,13 @@ public class Home extends HttpServlet {
     }
  
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+		response.setHeader("Pragma", "no-cache");
+		response.setDateHeader("Expires", 0);
 		HomeImpl home =new controller.HomeImpl();
 		HttpSession session = request.getSession();
 		try {
 			List<etudiant> etudiants = home.allSEtudiants();
-			
 			session.setAttribute("etudiants", etudiants);
 		} catch (ClassNotFoundException | SQLException e1) {
 			// TODO Auto-generated catch block
@@ -53,21 +64,24 @@ public class Home extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	    // TODO Auto-generated method stub
 		HomeImpl home =new controller.HomeImpl();
-		String[] selectedIdsArray = request.getParameterValues("selectedIdsInput");
- 	    System.out.println("selectedIdsArray: " + Arrays.toString(selectedIdsArray));
- 	    int numberOfSelectedStudents = selectedIdsArray.length;
- 	    request.setAttribute("numberOfSelectedStudents", numberOfSelectedStudents);
- 	   List<String> selectedIds = Arrays.asList(selectedIdsArray);
+	
 	    String action= request.getParameter("action");
 	    System.out.println(action);
 	    if (action!=null) {
-	    
+	    	
 		    if (action.equals("valider") ) {
-		   	 	
-		 	    
-		        for (String id : selectedIds) {
+		    	String[] selectedIdsArray = request.getParameterValues("selectedIdsInput");
+		 	    System.out.println("selectedIdsArray: " + Arrays.toString(selectedIdsArray));
+		 	    int numberOfSelectedStudents = selectedIdsArray.length;
+		 	    request.setAttribute("numberOfSelectedStudents", numberOfSelectedStudents);
+		 	   List<String> selectedIdsList = new ArrayList<>();
+		 	    String[] ids = selectedIdsArray[0].split(",");
+	            selectedIdsList.addAll(Arrays.asList(ids));	
+		 	 
+		        for (int k=0; k<selectedIdsList.size();k++) {
+		        	
 		            try {
-		                home.ValiderEtudiant(Integer.parseInt(id));
+		                home.ValiderEtudiant(Integer.parseInt(selectedIdsList.get(k)) );
 		                // You can provide a success message here if needed
 		            } catch (NumberFormatException | ClassNotFoundException | SQLException e) {
 		                e.printStackTrace();
@@ -117,33 +131,31 @@ public class Home extends HttpServlet {
 				}
 		    	
 		    	
+		    	
 		    }
-		    if (action.equals("modifier-phase1")) {
-		   	 
-		    	try {
-					etudiant etudiant=home.chercherEtudiant(Integer.parseInt(selectedIds.get(0)));
-					System.out.println(etudiant);
-					request.setAttribute("nomEtudiant", etudiant.getNom());
-					request.setAttribute("prenomEtudiant", etudiant.getPrenom());
-					request.setAttribute("codeEtudiant", etudiant.getCodeEtudiant());
-					request.setAttribute("categorieEtudiant", etudiant.getCategorie());
-					request.setAttribute("typeDeBacEtudiant", etudiant.getTypeDeBac());
-					request.setAttribute("noteEtudiant", etudiant.getNote());
-					request.setAttribute("tel1Etudiant", etudiant.getTel1());
-					request.setAttribute("tel2Etudiant", etudiant.getTel2());
-					request.setAttribute("validerEtudiant", etudiant.getValider());
-					request.setAttribute("statutEtudiant", etudiant.getStatut());
-					request.setAttribute("DimportEtudiant", etudiant.getDimport());
-					request.setAttribute("regEtudiant", etudiant.getReg());
-					
-					
-				} catch (NumberFormatException | ClassNotFoundException | SQLException e) {
+		    if (action.equals("importer")) {
+		        Part filePart = request.getPart("file");
+		        
+		        FileInputStream fileInputStream =(FileInputStream) filePart.getInputStream();
+		        System.out.print(filePart.getName());
+		        try {
+					home.importerEtudiant(fileInputStream);
+					response.sendRedirect(request.getContextPath() + "/Home");
+			        return;
+				} catch (ClassNotFoundException | SQLException | IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+		        
+		        response.setStatus(HttpServletResponse.SC_OK);
 		    }
+		  
 		    if (action.equals("modifier-phase2")) {
-		    	
+		    	String[] selectedIdsArray = request.getParameterValues("selectedIdsInput");
+		 	    System.out.println("selectedIdsArray: " + Arrays.toString(selectedIdsArray));
+		 	    int numberOfSelectedStudents = selectedIdsArray.length;
+		 	    request.setAttribute("numberOfSelectedStudents", numberOfSelectedStudents);
+		 	   List<String> selectedIds = Arrays.asList(selectedIdsArray);
 		    	try {
 					etudiant etudiant=home.chercherEtudiant(Integer.parseInt(selectedIds.get(0)));
 					String etudiantCode= request.getParameter("studentCode1");
