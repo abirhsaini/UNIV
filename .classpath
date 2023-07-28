@@ -11,7 +11,6 @@
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
 	<classpathentry kind="lib" path="C:/Users/pc/Desktop/inpt/1 ere annee/s1/s2/poo/mysql-connector-java-8.0.20/mysql-connector-java-8.0.20/mysql-connector-java-8.0.20.jar"/>
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/lombok.jar"/>
-	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/poi-3.9.jar"/>
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/ant-1.10.12.jar"/>
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/ant-launcher-1.10.12.jar"/>
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/commons-codec-1.15.jar"/>
@@ -27,5 +26,7 @@
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/poi-ooxml-lite-5.2.3.jar"/>
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/SparseBitSet-1.2.jar"/>
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/xmlbeans-5.1.1.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/xmpbox-3.0.0-beta1.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/itextpdf-5.5.9.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
