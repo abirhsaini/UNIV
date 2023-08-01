@@ -1,5 +1,5 @@
 pipeline{
-    agent agent1
+    agent any
     
     environment {
         sonarQube = credentials('sonarqube')
