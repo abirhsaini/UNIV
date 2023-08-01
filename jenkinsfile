@@ -16,9 +16,6 @@ pipeline{
                     sh 'mvn sonar:sonar -Dsonar.token=${sonarQube}'
                 }
             }
-            
         }
-
     }
-    
 }
