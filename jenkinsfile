@@ -11,6 +11,7 @@ pipeline{
                 }
             }
             steps{
+                
                 script {
                     sh 'mvn clean install'
                     sh 'mvn sonar:sonar -Dsonar.token=${sonarQube}'
