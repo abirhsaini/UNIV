@@ -6,11 +6,7 @@ pipeline{
     }
     stages{
         stage("check sonar quality"){
-            agent{
-                docker {
-                    image 'abirhsaini/maven-with-sonarqube:latest' 
-                }
-            }
+            
             steps{
 
                 script {
