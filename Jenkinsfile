@@ -8,7 +8,7 @@ pipeline{
         stage("check sonar quality"){
             agent{
                 docker {
-                    image 'maven:3.9.3-eclipse-temurin-17' 
+                    image 'maven:latest' 
                     args '-v /root/.m2:/root/.m2' 
 
                 }
