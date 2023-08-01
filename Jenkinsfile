@@ -9,6 +9,7 @@ pipeline{
             agent{
                 docker {
                     image 'abirhsaini/maven-with-sonarqube:latest' 
+                    args '-v $HOME/.m2:/root/.m2'
                     
 
                 }
