@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:web="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_4.xsd" id="WebApp_ID" version="2.4">
+  <display-name>UNIV1</display-name>
+  <welcome-file-list>
+    <welcome-file>JSP/auth.jsp</welcome-file>
+  </welcome-file-list>
+  <servlet>
+    <description></description>
+    <display-name>Login</display-name>
+    <servlet-name>Login</servlet-name>
+    <servlet-class>servelet.Login</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Login</servlet-name>
+    <url-pattern>/Login</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Home</display-name>
+    <servlet-name>Home</servlet-name>
+    <servlet-class>servelet.Home</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Home</servlet-name>
+    <url-pattern>/Home</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>idonok</display-name>
+    <servlet-name>idonok</servlet-name>
+    <servlet-class>servelet.idonok</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>idonok</servlet-name>
+    <url-pattern>/idonok</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Preinscription</display-name>
+    <servlet-name>Preinscription</servlet-name>
+    <servlet-class>servelet.Preinscription</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Preinscription</servlet-name>
+    <url-pattern>/Preinscription</url-pattern>
+  </servlet-mapping>
+</web-app>

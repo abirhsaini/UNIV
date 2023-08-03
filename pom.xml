@@ -10,7 +10,18 @@
         <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
     
-   
+    <build> <!-- Make sure the <plugins> section is inside the <build> section -->
+        <plugins>
+            <!-- Other plugins -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.3.1</version> <!-- Update to a more recent version -->
+                <!-- Other configuration for the Maven War Plugin (if any) -->
+            </plugin>
+            <!-- Other plugins -->
+        </plugins>
+    </build>
   <dependencies>
     <!-- Example: Servlet API -->
   <!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
