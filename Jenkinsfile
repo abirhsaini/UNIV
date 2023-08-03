@@ -6,11 +6,6 @@ pipeline{
         VERSION = "${env.BUILD_ID}"
     }
     stages{
-        stage('Clean Workspace') {
-            steps {
-                cleanWs()
-            }
-        }
         stage("check sonar quality"){
             
             steps{
