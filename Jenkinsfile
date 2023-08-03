@@ -33,8 +33,8 @@ pipeline{
         stage(" docker build and push "){
             steps {
                 script {
-                    withCredentials([string(credentialsId: 'nexus-password', variable: 'nexus-password')]) {
-                        sh "docker login -u admin -p ${nexus-password} nexus:8083"
+                    withCredentials([string(credentialsId: 'nexus-password', variable: 'nexus_password')]) {
+                        sh "docker login -u admin -p ${nexus_password} nexus:8083"
                         sh "docker compose up"
                         sh "docker push nexus:8081/univ:${JENKINS_BUILD_ID}"
                         
