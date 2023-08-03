@@ -39,6 +39,7 @@ pipeline{
                         sh "docker push nexus:8081/univ:${JENKINS_BUILD_ID}"
                         
                     }
+                    
                 }
 
             }
