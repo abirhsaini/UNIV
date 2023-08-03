@@ -39,7 +39,7 @@ services:
     networks:
       - jenkins
     environment:
-      - JENKINS_BUILD_ID=${BUILD_ID} 
+      - JENKINS_BUILD_ID="${env.BUILD_ID}" 
     ports: 
       - "8082:8080"
     container_name: nexus:8081/univ:${JENKINS_BUILD_ID}

@@ -3,7 +3,7 @@ pipeline{
     
     environment {
         sonarQube = credentials('sonarqube')
-        VERSION = env.BUILD_ID
+        VERSION = "${env.BUILD_ID}"
     }
     stages{
         stage("check sonar quality"){
