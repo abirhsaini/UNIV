@@ -1,0 +1,42 @@
+# Fichiers générés par Maven
+target/
+
+# Fichiers spécifiques aux IDE (Eclipse, IntelliJ, NetBeans, etc.)
+.idea/
+*.iml
+*.ipr
+*.iws
+.classpath
+.project
+.settings/
+
+# Fichiers de sauvegarde (ex : Vim)
+*~
+
+# Fichiers de configuration de Maven
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+
+# Rapports de tests et journaux
+test-output/
+surefire-reports/
+
+# Fichiers de construction
+build/
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.tag
+pom.xml.next
+
+# Fichiers de sauvegarde créés par l'IDE
+*~
+
+# Fichiers spécifiques à macOS
+.DS_Store
+
+# Fichiers spécifiques à Windows
+Thumbs.db
