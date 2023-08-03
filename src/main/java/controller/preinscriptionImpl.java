@@ -43,10 +43,10 @@ public class preinscriptionImpl {
 		
 		List<etudiant> listEtudiants=new ArrayList<etudiant>();
 		
-		 connexion connexionInstance = new connexion(); // Créer une instance de la classe connexion
+		 connexion connexionInstance = new connexion(); // Crï¿½er une instance de la classe connexion
 	     connection = connexionInstance.connection();
 	     
-	     PreparedStatement statement =connection.prepareStatement("select * from etudiant where valider= 'validé' ");
+	     PreparedStatement statement =connection.prepareStatement("select * from etudiant where valider= 'validÃ©' ");
 	     ResultSet rSet= statement.executeQuery();
 	     while (rSet.next()) {
 	    	 
@@ -75,7 +75,7 @@ public class preinscriptionImpl {
 	}
 
 	public void admisEtudiant(int IdEtudiant) throws ClassNotFoundException, SQLException {
-		connexion connexionInstance = new connexion(); // Créer une instance de la classe connexion
+		connexion connexionInstance = new connexion(); // Crï¿½er une instance de la classe connexion
 	    connection = connexionInstance.connection();
 	    PreparedStatement statement =connection.prepareStatement("UPDATE etudiant SET admission = ? WHERE idEtudiant = ?");
 	    System.out.println("modidier valider");
@@ -153,7 +153,7 @@ public class preinscriptionImpl {
 		             String tel2 = row.getCell(8).getStringCellValue();
 		             etudiant.setTel2(tel2);  
 		             
-		             etudiant.setValider("validé");
+		             etudiant.setValider("validï¿½");
 		             
 		             String statut=row.getCell(9).getStringCellValue();
 		             etudiant.setStatut(statut);
@@ -165,7 +165,7 @@ public class preinscriptionImpl {
 		             
 		             
 		             
-		             etudiant.setStatut("non saturé");
+		             etudiant.setStatut("non saturï¿½");
 		             etudiant.setDimport((new Date()).toString());
 		             etudiant.setReg("N.R");
 		             
@@ -293,15 +293,15 @@ public class preinscriptionImpl {
 	            Font font = new Font(Font.FontFamily.TIMES_ROMAN, 20, Font.BOLD,BaseColor.BLACK);
 	            Font fontbody = new Font(Font.FontFamily.TIMES_ROMAN, 12, Font.NORMAL,BaseColor.BLACK);
 	            
-	            Chunk chunkbody = new Chunk("Nous, soussigné Université internationale ABULCASSIS des sciences et santé , après examen du dossier présenté, donnons acte à ",fontbody);
+	            Chunk chunkbody = new Chunk("Nous, soussignï¿½ Universitï¿½ internationale ABULCASSIS des sciences et santï¿½ , aprï¿½s examen du dossier prï¿½sentï¿½, donnons acte ï¿½ ",fontbody);
 	            Font fontEtudiant=new Font(Font.FontFamily.TIMES_ROMAN, 12, Font.BOLD,BaseColor.BLACK);
 				Chunk chunketudiantChunk =new Chunk( etudiant.getNom() + " " + etudiant.getPrenom() , fontEtudiant);
-	            Chunk chunkBody1 = new Chunk(" sa préinscription en Université internationale ABULCASSIS des sciences et santé au titre de l'année academique 2022 - 2023 .",fontbody);
+	            Chunk chunkBody1 = new Chunk(" sa prï¿½inscription en Universitï¿½ internationale ABULCASSIS des sciences et santï¿½ au titre de l'annï¿½e academique 2022 - 2023 .",fontbody);
 	            Chunk chunkbody2=new Chunk("L'inscription ne sera definitive qu'apres l'admission dans le concour.",fontbody);
 	            @SuppressWarnings("deprecation")
-				Chunk chunkbody3 =new Chunk ("Fait à Rabat, le "+ todaysDate, fontbody);
+				Chunk chunkbody3 =new Chunk ("Fait ï¿½ Rabat, le "+ todaysDate, fontbody);
 	            Chunk chunkfooter =new Chunk ("Direction" , fontEtudiant);
-	            Chunk chunk = new Chunk("Attestation de la préinscription ", font);
+	            Chunk chunk = new Chunk("Attestation de la prï¿½inscription ", font);
 	            
 	            Paragraph objectParagraph = new Paragraph();
 	            Paragraph bodyParagraph = new Paragraph();

@@ -1,0 +1,48 @@
+version: "3"
+networks: 
+  jenkins:
+    external: true
+volumes:
+  db_data:
+
+
+services:
+  mysql-db:
+    container_name: mysql
+    image: mysql:latest
+    networks:
+      - jenkins
+    volumes:
+      - db_data:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=univ
+    ports:
+      - "3306:3306"
+  phpmyadmin:
+    container_name: phpmyadmin
+    image: phpmyadmin/phpmyadmin:latest
+    networks:
+      - jenkins
+    environment:
+      - PMA_HOST=mysql
+      - PMA_USER=root
+      - PMA_PASSWORD=root
+    ports:
+      - "80:80"
+    depends_on:
+      - mysql-db
+  app-jee: 
+    build:
+      context: .
+      dockerfile: Dockerfile
+    networks:
+      - jenkins
+    environment:
+      - JENKINS_BUILD_ID=${BUILD_ID} 
+    ports: 
+      - "8082:8080"
+    container_name: nexus:8081/univ:${JENKINS_BUILD_ID}
+    depends_on:
+      - phpmyadmin
+    
