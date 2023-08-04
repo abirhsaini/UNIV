@@ -36,7 +36,7 @@ pipeline{
                     withCredentials([string(credentialsId: 'nexus-password', variable: 'nexus_password')]) {
                         sh "docker login -u admin -p ${nexus_password} nexus:8083"
                         sh "docker compose up -d"
-                        sh "docker push nexus:8081/univ:${JENKINS_BUILD_ID}"
+                        sh "docker push nexus:8081/univ"
                         
                     }
 
