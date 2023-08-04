@@ -11,7 +11,7 @@ services:
     container_name: mysql
     image: mysql:latest
     networks:
-      - jenkins
+      - UNIV
     volumes:
       - db_data:/var/lib/mysql
     environment:
@@ -23,7 +23,7 @@ services:
     container_name: phpmyadmin
     image: phpmyadmin/phpmyadmin:latest
     networks:
-      - jenkins
+      - UNIV
     environment:
       - PMA_HOST=mysql
       - PMA_USER=root
@@ -37,7 +37,7 @@ services:
       context: .
       dockerfile: Dockerfile
     networks:
-      - jenkins
+      - UNIV
  
     ports: 
       - "8082:8080"
