@@ -1,7 +1,6 @@
 version: "3"
 networks: 
-  jenkins:
-    external: true
+  UNIV:
 volumes:
   db_data:
 
