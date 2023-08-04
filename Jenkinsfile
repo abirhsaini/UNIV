@@ -37,6 +37,7 @@ pipeline{
                         sh "docker login -u admin -p ${nexus_password} nexus:8083"
                         sh "docker compose up -d"
                         sh "docker push nexus:8083/univ"
+                        sh "docker rm nexus:8083/univ"
                         
                     }
 
