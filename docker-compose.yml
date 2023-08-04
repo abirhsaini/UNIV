@@ -35,12 +35,13 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      image: nexus:8081/univ
     networks:
       - UNIV
  
     ports: 
       - "8082:8080"
-    container_name: nexus:8081/univ
+    container_name: univ
     depends_on:
       - phpmyadmin
     
