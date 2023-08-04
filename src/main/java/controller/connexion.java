@@ -10,7 +10,7 @@ public class connexion {
 		
 		String url = "jdbc:mysql://mysql:3306/univ";
 		String user ="root";
-		String pwd="root";
+		String pwd = System.getenv("DB_PASSWORD"); 
 		
 		
 		
