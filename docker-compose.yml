@@ -35,7 +35,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-      image: nexus:8081/univ
+    image: nexus:8081/univ
     networks:
       - UNIV
  
