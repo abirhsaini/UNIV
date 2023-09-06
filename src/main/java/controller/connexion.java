@@ -8,7 +8,7 @@ public class connexion {
 	Connection connection;
 	public  Connection  connection() throws ClassNotFoundException, SQLException {
 		
-		String url = "jdbc:mysql://mysql:3306/univ";
+		String url = "jdbc:mysql://localhost:3306/univ";
 		String user ="root";
 		String pwd = System.getenv("DB_PASSWORD"); 
 		
