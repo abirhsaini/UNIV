@@ -44,12 +44,18 @@ pipeline{
                 }
             }
         }
-        stage(" docker build and push "){
+        stage("docker build"){
+            steps{
+                script {
+                    sh "docker compose up -d"
+                }
+            }
+        }
+        stage(" docker push "){
             steps {
                 script {
                     withCredentials([string(credentialsId: 'nexus-password', variable: 'nexus_password')]) {
                         sh "docker login -u admin -p ${nexus_password} nexus:8083"
-                        sh "docker compose up -d"
                         sh "docker push nexus:8083/univ"
                         sh "docker image rm -f nexus:8083/univ"
                         
