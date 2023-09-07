@@ -34,12 +34,12 @@ pipeline{
                        
                         sh 'mvn sonar:sonar '
                     }
-                    // timeout(time: 1,unit: "HOURS"){
-                    //     def gp=waitForQualityGate()
-                    //     if (gp.status!= "OK"){
-                    //         error "Pipline aborted due to quality gate failure ${gp.status}"
-                    //     }
-                    // }
+                    timeout(time: 1,unit: "HOURS"){
+                        def gp=waitForQualityGate()
+                        if (gp.status!= "OK"){
+                            error "Pipline aborted due to quality gate failure ${gp.status}"
+                        }
+                    }
                     
                 }
             }
